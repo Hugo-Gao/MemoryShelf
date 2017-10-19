@@ -1,5 +1,6 @@
 package com.gyfzyt.memoryshelf.Activity;
 
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.gyfzyt.memoryshelf.DB.MyDBHelper;
 import com.gyfzyt.memoryshelf.R;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener
@@ -21,12 +23,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private HomeFragment homeFragment = new HomeFragment();
     private SearchFragment searchFragment = new SearchFragment();
     private MeFragment meFragment = new MeFragment();
+    private SQLiteOpenHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHelper = new MyDBHelper(this,"shelfDB.db",null,1);
         initView();
     }
 

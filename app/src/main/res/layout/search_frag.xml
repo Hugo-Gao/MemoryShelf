@@ -10,20 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:maxLines="1"
         app:met_baseColor="@color/colorPrimary"
         android:hint="请输入要搜索的内容"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        android:id="@+id/linearLayout">
 
-        <com.unstoppable.submitbuttonview.SubmitButton
+        <com.dd.CircularProgressButton
             android:id="@+id/book_btn"
             android:layout_width="150dp"
             android:layout_height="45dp"
-            app:progressStyle="loading"
-            app:buttonText="搜索书籍"/>
+            android:layout_marginStart="10dp"
+            android:textColor="#ffffff"
+            app:cpb_textComplete="已找到"
+            app:cpb_selectorIdle="@color/book_idle_state_selector"
+            app:cpb_textError="出错"
+            app:cpb_textIdle="搜索书籍"
+            app:cpb_cornerRadius="3dp"
+            />
 
     </LinearLayout>
 
@@ -31,15 +39,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right"
-        android:layout_marginTop="60dp">
+        android:gravity="end"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_alignParentStart="true">
 
-        <com.unstoppable.submitbuttonview.SubmitButton
+        <com.dd.CircularProgressButton
             android:id="@+id/movie_btn"
             android:layout_width="150dp"
             android:layout_height="45dp"
-            app:progressStyle="loading"
-            app:buttonText="搜索电影"/>
+            android:layout_marginEnd="10dp"
+            app:cpb_textIdle="搜索电影"
+            android:textColor="#ffffff"
+            app:cpb_selectorIdle="@color/movie_idle_state_selector"
+            app:cpb_textComplete="已找到"
+            app:cpb_textError="出错"
+            app:cpb_cornerRadius="3dp"
+            />
 
     </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        android:paddingBottom="10dp"
+
+        />
+
 </RelativeLayout>

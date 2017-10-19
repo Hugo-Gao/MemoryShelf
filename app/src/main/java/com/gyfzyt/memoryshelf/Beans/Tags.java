@@ -8,6 +8,15 @@ public class Tags {
     private String name;
     private String title;
 
+    @Override
+    public String toString()
+    {
+        return "Tags{" +
+                "name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

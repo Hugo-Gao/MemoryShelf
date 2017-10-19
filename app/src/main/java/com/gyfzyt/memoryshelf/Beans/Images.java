@@ -11,4 +11,12 @@ public class Images {
     public void setLarge(String large) {
         this.large = large;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Images{" +
+                "large='" + large + '\'' +
+                '}';
+    }
 }

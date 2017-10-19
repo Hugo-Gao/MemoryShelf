@@ -16,6 +16,37 @@ public class Book {
     private String author_intro;    //作者简介
     private String summary;         //书籍简介
     private String price;           //价格
+    private String id;
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Book{" +
+                "rating=" + rating +
+                ", author=" + author +
+                ", pubdate='" + pubdate + '\'' +
+                ", tags=" + tags +
+                ", origin_title='" + origin_title + '\'' +
+                ", pages='" + pages + '\'' +
+                ", images=" + images +
+                ", publisher='" + publisher + '\'' +
+                ", title='" + title + '\'' +
+                ", author_intro='" + author_intro + '\'' +
+                ", summary='" + summary + '\'' +
+                ", price='" + price + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 
     public Ratings getRating() {
         return rating;

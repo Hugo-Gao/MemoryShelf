@@ -8,6 +8,13 @@ public class Ratings {
 
     private String average;
 
+    @Override
+    public String toString()
+    {
+        return "Ratings{" +
+                "average='" + average + '\'' +
+                '}';
+    }
 
     public String getAverage() {
         return average;

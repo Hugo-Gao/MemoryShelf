@@ -1,0 +1,105 @@
+package com.gyfzyt.memoryshelf.Adapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.dd.CircularProgressButton;
+import com.gyfzyt.memoryshelf.Beans.Book;
+import com.gyfzyt.memoryshelf.DB.MyDBHelper;
+import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
+import com.gyfzyt.memoryshelf.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2017/10/15.
+ */
+
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterViewHolder>
+{
+    private List<Book> bookList;
+    private Context context;
+    private LayoutInflater layoutInflater;
+    private MyDBHelper dbHelper;
+    private List<String> idList;
+    public BookAdapter(List<Book> books, Context context)
+    {
+        bookList = new ArrayList<>(books);
+        this.context = context;
+        this.layoutInflater=LayoutInflater.from(context);
+        dbHelper = new MyDBHelper(context,"shelfDB.db",null,1);
+        idList = BookDBUtil.searchForId(dbHelper.getReadableDatabase());
+    }
+
+    @Override
+    public BookAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View view = layoutInflater.inflate(R.layout.book_card, parent, false);
+        return new BookAdapterViewHolder(view,context);
+    }
+
+    @Override
+    public void onBindViewHolder(final BookAdapterViewHolder holder, final int position)
+    {
+        final Book book = bookList.get(position);
+        holder.book_author.setText(book.getAuthor().toString());
+        holder.book_name.setText(book.getTitle());
+        holder.book_price.setText("￥"+book.getPrice());
+        if(idList.contains(book.getId()))
+        {
+            holder.button.setProgress(100);
+        }
+        holder.button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(holder.button.getProgress()==100)
+                {
+                    BookDBUtil.deleteInfoDB(book,dbHelper.getWritableDatabase());
+                    holder.button.setProgress(0);
+                }else
+                {
+                    BookDBUtil.insertIntoDB(book,dbHelper.getWritableDatabase());
+                    holder.button.setProgress(100);
+                }
+
+            }
+        });
+        Picasso.with(context).load(book.getImages().getLarge()).into(holder.book_pic);
+        Log.d("haha", "adapter执行完毕");
+    }
+
+    @Override
+    public int getItemCount()
+    {
+        return bookList.size();
+    }
+
+    public static class BookAdapterViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView book_pic;
+        TextView book_name;
+        TextView book_price;
+        TextView book_author;
+        CircularProgressButton button;
+        public BookAdapterViewHolder(View itemView, final Context context)
+        {
+            super(itemView);
+            book_pic = (ImageView) itemView.findViewById(R.id.book_pic);
+            book_name = (TextView) itemView.findViewById(R.id.book_name);
+            book_price = (TextView) itemView.findViewById(R.id.book_price);
+            book_author = (TextView) itemView.findViewById(R.id.author_name);
+            button = (CircularProgressButton) itemView.findViewById(R.id.add_book_btn);
+
+        }
+    }
+}
