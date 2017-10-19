@@ -2,11 +2,22 @@ package com.gyfzyt.memoryshelf.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gyfzyt.memoryshelf.Adapter.MainBookAdapter;
+import com.gyfzyt.memoryshelf.Beans.Book;
+import com.gyfzyt.memoryshelf.DB.MyDBHelper;
+import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
 import com.gyfzyt.memoryshelf.R;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/14.
@@ -14,13 +25,38 @@ import com.gyfzyt.memoryshelf.R;
 
 public class BookListFragment extends android.support.v4.app.Fragment
 {
+    public RecyclerView recyclerView;
+    private MyDBHelper dbHelper;
+    private SwipeRefreshLayout refreshLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
     {
         View view= inflater.inflate(R.layout.booklist_frag,container,false);
-
+        initView(view);
         return view;
+    }
+
+    private void initView(View view)
+    {
+        dbHelper = new MyDBHelper(getActivity(),"shelfDB.db",null,1);
+        recyclerView = (RecyclerView) view.findViewById(R.id.book_list);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.layout_swipe_refresh);
+        List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+        recyclerView.setAdapter(new MainBookAdapter(bookList, getActivity()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh()
+            {
+                List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+                recyclerView.setAdapter(new MainBookAdapter(bookList, getActivity()));
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
     }
 
 }

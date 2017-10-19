@@ -20,7 +20,7 @@ public class HomeFragment extends android.support.v4.app.Fragment
 {
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private BookListFragment bookListFragment = new BookListFragment();
+    public BookListFragment bookListFragment = new BookListFragment();
     private MovieListFragment movieListFragment = new MovieListFragment();
     @Nullable
     @Override
@@ -107,5 +107,6 @@ public class HomeFragment extends android.support.v4.app.Fragment
             }
         });
     }
+
 
 }

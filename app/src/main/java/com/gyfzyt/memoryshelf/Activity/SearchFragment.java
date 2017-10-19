@@ -46,6 +46,7 @@ public class SearchFragment extends android.support.v4.app.Fragment
             switch (message.what)
             {
                 case 0:
+                    bookBtn.setErrorText((String) message.obj);
                     bookBtn.setProgress(-1);
                     break;
                 case 1:
@@ -90,7 +91,16 @@ public class SearchFragment extends android.support.v4.app.Fragment
                     bookBtn.setProgress(0);
                     return;
                 }
-                searchBook(String.valueOf(editText.getText()));
+
+                bookBtn.setProgress(50);
+                String searchContent = String.valueOf(editText.getText());
+                if(searchContent.length()==0)
+                {
+                    bookBtn.setProgress(-1);
+                    bookBtn.setErrorText("请输入内容");
+                    return ;
+                }
+                searchBook(searchContent);
             }
         });
 
@@ -109,6 +119,7 @@ public class SearchFragment extends android.support.v4.app.Fragment
             {
                 Message message = handler.obtainMessage();
                 message.what=0;
+                message.obj = "网络出错";
                 handler.sendMessage(message);
                 Log.d("haha", "解析失败");
             }
@@ -129,6 +140,7 @@ public class SearchFragment extends android.support.v4.app.Fragment
                 {
                     Message message = handler.obtainMessage();
                     message.what=0;
+                    message.obj = "网络出错";
                     handler.sendMessage(message);
                     Log.d("haha", "解析出错");
                 }
@@ -137,4 +149,6 @@ public class SearchFragment extends android.support.v4.app.Fragment
             }
         });
     }
+
+
 }

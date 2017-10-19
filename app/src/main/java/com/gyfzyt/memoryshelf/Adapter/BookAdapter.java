@@ -13,6 +13,7 @@ import com.dd.CircularProgressButton;
 import com.gyfzyt.memoryshelf.Beans.Book;
 import com.gyfzyt.memoryshelf.DB.MyDBHelper;
 import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
+import com.gyfzyt.memoryshelf.Dao.SPUtil;
 import com.gyfzyt.memoryshelf.R;
 import com.squareup.picasso.Picasso;
 
@@ -50,7 +51,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVie
     public void onBindViewHolder(final BookAdapterViewHolder holder, final int position)
     {
         final Book book = bookList.get(position);
-        holder.book_author.setText(book.getAuthor().toString());
+        List<String> list = new ArrayList<>(book.getAuthor());
+        if(list.size()>0)
+            holder.book_author.setText(list.get(0)+" 著");
         holder.book_name.setText(book.getTitle());
         holder.book_price.setText("￥"+book.getPrice());
         if(idList.contains(book.getId()))
@@ -66,10 +69,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookAdapterVie
                 {
                     BookDBUtil.deleteInfoDB(book,dbHelper.getWritableDatabase());
                     holder.button.setProgress(0);
+                    SPUtil.deleteBookChangeNum(context);
                 }else
                 {
                     BookDBUtil.insertIntoDB(book,dbHelper.getWritableDatabase());
                     holder.button.setProgress(100);
+                    SPUtil.addBookChangeNum(context);
                 }
 
             }

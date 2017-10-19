@@ -8,12 +8,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.gyfzyt.memoryshelf.Adapter.MainBookAdapter;
+import com.gyfzyt.memoryshelf.Beans.Book;
 import com.gyfzyt.memoryshelf.DB.MyDBHelper;
+import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
+import com.gyfzyt.memoryshelf.Dao.SPUtil;
 import com.gyfzyt.memoryshelf.R;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener
 {
@@ -72,6 +79,15 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             {
                 Log.d("haha", item.getOrder()+"");
                 viewPager.setCurrentItem(item.getOrder());
+                if(item.getOrder()==0)
+                {
+                    if (SPUtil.getBookChangeNum(MainActivity.this))
+                    {
+                        List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+                        homeFragment.bookListFragment.recyclerView.setAdapter(new MainBookAdapter(bookList, MainActivity.this));
+                        homeFragment.bookListFragment.recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    }
+                }
                 return true;
             }
         });

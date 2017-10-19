@@ -5,6 +5,10 @@ package com.gyfzyt.memoryshelf.Beans;
  */
 public class Ratings {
 
+    public Ratings(String average)
+    {
+        this.average = average;
+    }
 
     private String average;
 

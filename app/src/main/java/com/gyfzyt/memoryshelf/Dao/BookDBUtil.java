@@ -5,8 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gyfzyt.memoryshelf.Beans.Book;
+import com.gyfzyt.memoryshelf.Beans.Images;
+import com.gyfzyt.memoryshelf.Beans.Ratings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -41,7 +45,12 @@ public class BookDBUtil
         db.execSQL(sql);
         db.close();
     }
-
+    public static void deleteInfoDB(String book_id, SQLiteDatabase db)
+    {
+        String sql = "delete from Books where book_id = " + book_id;
+        db.execSQL(sql);
+        db.close();
+    }
     public static List<String> searchForId(SQLiteDatabase db)
     {
         List<String> res = new ArrayList<>();
@@ -51,6 +60,44 @@ public class BookDBUtil
         }
         cursor.close();
         db.close();
+        return res;
+    }
+
+
+    /**
+     * 返回数据库中所有数据
+     * @param db
+     * @return
+     */
+    public static List<Book> searchForAllBook(SQLiteDatabase db)
+    {
+        List<Book> res = new ArrayList<>();
+        Cursor cursor = db.query("Books", null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            Book book = new Book();
+            book.setTitle(cursor.getString(cursor.getColumnIndex("bookName")));
+            book.setPubdate(cursor.getString(cursor.getColumnIndex("publishTime")));
+            book.setRating(new Ratings(cursor.getDouble(cursor.getColumnIndex("rating"))+""));
+            book.setTagStr(cursor.getString(cursor.getColumnIndex("tags")));
+            book.setImages(new Images(cursor.getString(cursor.getColumnIndex("imgUrl"))));
+            book.setAuthor_intro(cursor.getString(cursor.getColumnIndex("authorIntro")));
+            String[] authors = cursor.getString(cursor.getColumnIndex("author")).split(",");
+            List<String> authorList = new ArrayList<>();
+            for (String author : authors)
+            {
+                authorList.add(author);
+            }
+            book.setAuthor(authorList);
+            book.setSummary(cursor.getString(cursor.getColumnIndex("bookSummary")));
+            book.setPublisher(cursor.getString(cursor.getColumnIndex("publisher")));
+            book.setPages(cursor.getInt(cursor.getColumnIndex("pages"))+"");
+            book.setPrice(cursor.getString(cursor.getColumnIndex("price")));
+            book.setId(cursor.getString(cursor.getColumnIndex("book_id")));
+            res.add(book);
+        }
+        cursor.close();
+        db.close();
+        Collections.reverse(res);
         return res;
     }
 }

@@ -17,6 +17,17 @@ public class Book {
     private String summary;         //书籍简介
     private String price;           //价格
     private String id;
+    private String tagStr;
+
+    public String getTagStr()
+    {
+        return tagStr;
+    }
+
+    public void setTagStr(String tagStr)
+    {
+        this.tagStr = tagStr;
+    }
 
     public String getId()
     {
@@ -45,6 +56,7 @@ public class Book {
                 ", summary='" + summary + '\'' +
                 ", price='" + price + '\'' +
                 ", id='" + id + '\'' +
+                ", tagStr='" + tagStr + '\'' +
                 '}';
     }
 

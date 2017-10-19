@@ -12,6 +12,11 @@ public class Images {
         this.large = large;
     }
 
+    public Images(String large)
+    {
+        this.large = large;
+    }
+
     @Override
     public String toString()
     {
