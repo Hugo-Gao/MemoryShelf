@@ -5,7 +5,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -28,6 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:backgroundTint="@color/colorPrimary"
+        app:itemIconTint="@color/book_detail_front_color"
+        app:itemTextColor="@color/book_detail_front_color"
+
         android:background="?android:attr/windowBackground"
         app:menu="@menu/menu_bottom_navigation"/>
 

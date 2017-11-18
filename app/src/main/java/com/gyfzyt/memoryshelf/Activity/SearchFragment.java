@@ -1,5 +1,6 @@
 package com.gyfzyt.memoryshelf.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
 import com.gyfzyt.memoryshelf.Adapter.BookAdapter;
@@ -51,8 +53,19 @@ public class SearchFragment extends android.support.v4.app.Fragment
                     break;
                 case 1:
                     bookBtn.setProgress(100);
-                    List<Book> books = (List<Book>) message.obj;
-                    recyclerView.setAdapter(new BookAdapter(books, getActivity()));
+                    final List<Book> books = (List<Book>) message.obj;
+                    BookAdapter adapter = new BookAdapter(books, getActivity());
+                    adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position)
+                        {
+                            Intent intent = new Intent();
+                            intent.putExtra("book", books.get(position));
+                            intent.setClass(getActivity(), BookDetailActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
             return true;

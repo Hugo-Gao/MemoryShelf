@@ -1,5 +1,6 @@
 package com.gyfzyt.memoryshelf.Activity;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.gyfzyt.memoryshelf.Adapter.MainBookAdapter;
 import com.gyfzyt.memoryshelf.Beans.Book;
@@ -83,9 +86,21 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 {
                     if (SPUtil.getBookChangeNum(MainActivity.this))
                     {
-                        List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
-                        homeFragment.bookListFragment.recyclerView.setAdapter(new MainBookAdapter(bookList, MainActivity.this));
+                        final List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+                        MainBookAdapter mainBookAdapter=new MainBookAdapter(bookList, MainActivity.this);
+                        mainBookAdapter.setOnItemClickListener(new MainBookAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Intent intent = new Intent();
+                                intent.putExtra("book", bookList.get(position));
+                                intent.setClass(MainActivity.this, BookDetailActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        homeFragment.bookListFragment.recyclerView.setAdapter(mainBookAdapter);
                         homeFragment.bookListFragment.recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        SPUtil.resetBookChangeNum(MainActivity.this);
+                        Log.d("haha","重新加载");
                     }
                 }
                 return true;

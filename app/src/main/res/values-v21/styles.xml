@@ -1,4 +1,16 @@
 <resources>
     <style name="AppTheme" parent="AppTheme.Base">
+        <!--&lt;!&ndash; 开启过渡效果 &ndash;&gt;-->
+        <!--<item name="android:windowContentTransitions">true</item>-->
+
+        <!--&lt;!&ndash; 指定界面进入/退出动画效果 &ndash;&gt;-->
+        <!--<item name="android:windowEnterTransition">@transition/transition</item>-->
+        <!--<item name="android:windowExitTransition">@transition/transition</item>-->
+
+        <!--&lt;!&ndash; 指定共享元素进入/退出的动画效果 &ndash;&gt;-->
+        <!--<item name="android:windowSharedElementEnterTransition">-->
+            <!--@transition/change_image_transform</item>-->
+        <!--<item name="android:windowSharedElementExitTransition">-->
+            <!--@transition/change_image_transform</item>-->
     </style>
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GradeBar">
+        <!--星星间距-->
+        <attr format="dimension" name="starDistance"/>
+        <!--星星大小-->
+        <attr format="dimension" name="starSize"/>
+        <!--星星空图-->
+        <attr format="reference" name="nullGrade"/>
+        <!--星星满图-->
+        <attr format="reference" name="Grade"/>
+    </declare-styleable>
+
+</resources>

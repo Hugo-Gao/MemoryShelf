@@ -1,9 +1,11 @@
 package com.gyfzyt.memoryshelf.Beans;
 
+import java.io.Serializable;
+
 /**
  * 标签（分类）
  */
-public class Tags {
+public class Tags implements Serializable{
 
     private String name;
     private String title;

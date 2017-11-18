@@ -1,6 +1,8 @@
 package com.gyfzyt.memoryshelf.Beans;
 
-public class Images {
+import java.io.Serializable;
+
+public class Images implements Serializable{
 
     private String large;
 

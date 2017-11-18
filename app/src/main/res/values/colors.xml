@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#DC4444</color>
-    <color name="colorPrimaryDark">#DC4444</color>
+    <color name="colorPrimary">#222222</color>
+    <color name="colorPrimaryDark">#222222</color>
     <color name="colorAccent">#FF4081</color>
     <color name="cpb_grey">#ffdedede</color>
     <color name="cpb_blue">#ff0099cc</color>
@@ -14,5 +14,6 @@
     <color name="movie_btn_idle">#4a3333</color>
     <color name="book_btn_idle">#85C7F2</color>
     <color name="add_btn_idle">#FF5757</color>
-
+    <color name="book_detail_back_color">#222222</color>
+    <color name="book_detail_front_color">#FBB03B</color>
 </resources>

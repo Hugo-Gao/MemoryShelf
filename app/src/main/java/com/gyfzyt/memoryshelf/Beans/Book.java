@@ -1,8 +1,9 @@
 package com.gyfzyt.memoryshelf.Beans;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable {
 
     private Ratings rating;         //豆瓣评分
     private List<String> author;    //作者

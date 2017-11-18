@@ -1,5 +1,6 @@
 package com.gyfzyt.memoryshelf.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.gyfzyt.memoryshelf.Adapter.MainBookAdapter;
 import com.gyfzyt.memoryshelf.Beans.Book;
@@ -42,8 +44,18 @@ public class BookListFragment extends android.support.v4.app.Fragment
         dbHelper = new MyDBHelper(getActivity(),"shelfDB.db",null,1);
         recyclerView = (RecyclerView) view.findViewById(R.id.book_list);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.layout_swipe_refresh);
-        List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
-        recyclerView.setAdapter(new MainBookAdapter(bookList, getActivity()));
+        final List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+        MainBookAdapter mainBookAdapter=new MainBookAdapter(bookList, getActivity());
+        mainBookAdapter.setOnItemClickListener(new MainBookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent();
+                intent.putExtra("book", bookList.get(position));
+                intent.setClass(getActivity(), BookDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(mainBookAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()

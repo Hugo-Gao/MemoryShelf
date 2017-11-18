@@ -3,7 +3,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#eaeaea"
+                android:background="@color/colorPrimary"
     >
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="请输入要搜索的内容"
+        app:met_textColor="@color/book_detail_front_color"
         android:maxLines="1"
-        app:met_baseColor="@color/colorPrimary"/>
+        app:met_baseColor="@color/book_detail_front_color"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,7 +30,7 @@
             android:layout_marginStart="10dp"
             android:textColor="#ffffff"
             app:cpb_cornerRadius="3dp"
-            app:cpb_selectorIdle="@color/book_idle_state_selector"
+            app:cpb_selectorIdle="@color/book_detail_front_color"
             app:cpb_textComplete="已找到"
             app:cpb_textError="网络出错"
             app:cpb_textIdle="搜索书籍"
@@ -71,6 +72,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
             />
     </LinearLayout>
 </RelativeLayout>

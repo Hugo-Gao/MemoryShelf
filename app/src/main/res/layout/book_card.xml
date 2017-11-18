@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/book_card_view"
@@ -19,7 +18,7 @@
         android:layout_width="140dp"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/book_name"
@@ -31,28 +30,39 @@
         android:maxLines="2"
         android:text="书名"
         android:textColor="#000000"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginTop="60dp"
-        android:text="豆瓣评分:"/>
+        android:text="豆瓣评分:" />
+
+    <com.gyfzyt.memoryshelf.views.GradeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="60dp"
+        app:Grade="@drawable/star"
+        app:nullGrade="@drawable/star_null"
+        app:starDistance="0dp"
+        app:starSize="15dp"
+        android:id="@+id/star"
+        />
 
     <TextView
         android:id="@+id/author_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="140dp"
         android:layout_marginStart="210dp"
-        android:maxLines="1"
+        android:layout_marginTop="140dp"
         android:gravity="right"
+        android:maxLines="1"
         android:text="XXX著"
-        android:textColor="#000000"
-        />
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/book_price"
@@ -62,8 +72,7 @@
         android:layout_marginTop="160dp"
         android:gravity="right"
         android:text="￥50"
-        android:textColor="#000000"
-        />
+        android:textColor="#000000" />
 
     <com.dd.CircularProgressButton
         android:id="@+id/add_book_btn"
@@ -75,6 +84,5 @@
         android:textSize="10sp"
         app:cpb_selectorIdle="@color/add_btn_idle"
         app:cpb_textComplete="已加入"
-        app:cpb_textIdle="加入记忆架"
-        />
+        app:cpb_textIdle="加入记忆架" />
 </android.support.v7.widget.CardView>

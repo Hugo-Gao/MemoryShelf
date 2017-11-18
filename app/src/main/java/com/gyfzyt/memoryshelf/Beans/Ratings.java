@@ -1,9 +1,11 @@
 package com.gyfzyt.memoryshelf.Beans;
 
+import java.io.Serializable;
+
 /**
  * 豆瓣评分
  */
-public class Ratings {
+public class Ratings implements Serializable{
 
     public Ratings(String average)
     {
