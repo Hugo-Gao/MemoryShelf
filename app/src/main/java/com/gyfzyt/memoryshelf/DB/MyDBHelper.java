@@ -19,7 +19,8 @@ public class MyDBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        String sql="CREATE TABLE IF NOT EXISTS Books(_id integer PRIMARY KEY AUTOINCREMENT not NULL ," +
+        String bookSql="CREATE TABLE IF NOT EXISTS Books(" +
+                "_id integer PRIMARY KEY AUTOINCREMENT not NULL ," +
                 "bookName TEXT," +
                 "publishTime TEXT," +
                 "rating REAL," +
@@ -32,8 +33,21 @@ public class MyDBHelper extends SQLiteOpenHelper
                 "pages INTEGER," +
                 "price TEXT," +
                 "book_id TEXT)";
-        db.execSQL(sql);
-        Log.d("haah", "数据库执行完毕");
+        db.execSQL(bookSql);
+        String movieSql = "CREATE TABLE IF NOT EXISTS Movies(" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," +
+                "movieName TEXT," +
+                "rating REAL," +
+                "genres REAL," +
+                "casts TEXT," +
+                "directors TEXT," +
+                "year TEXT," +
+                "imgUrl TEXT," +
+                "summary TEXT," +
+                "movie_id TEXT" +
+                ")";
+        db.execSQL(movieSql);
+        Log.d("haha", "数据库执行完毕");
     }
 
     @Override

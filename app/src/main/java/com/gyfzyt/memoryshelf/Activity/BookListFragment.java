@@ -7,14 +7,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.gyfzyt.memoryshelf.Adapter.MainBookAdapter;
-import com.gyfzyt.memoryshelf.Beans.Book;
+import com.gyfzyt.memoryshelf.Beans.bookBean.Book;
 import com.gyfzyt.memoryshelf.DB.MyDBHelper;
 import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
 import com.gyfzyt.memoryshelf.R;
@@ -23,6 +21,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/14.
+ * 主界面书籍列表
  */
 
 public class BookListFragment extends android.support.v4.app.Fragment
@@ -44,7 +43,7 @@ public class BookListFragment extends android.support.v4.app.Fragment
         dbHelper = new MyDBHelper(getActivity(),"shelfDB.db",null,1);
         recyclerView = (RecyclerView) view.findViewById(R.id.book_list);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.layout_swipe_refresh);
-        final List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+        final List<Book> bookList = BookDBUtil.searchForAll(dbHelper.getReadableDatabase());
         MainBookAdapter mainBookAdapter=new MainBookAdapter(bookList, getActivity());
         mainBookAdapter.setOnItemClickListener(new MainBookAdapter.OnItemClickListener() {
             @Override
@@ -63,7 +62,7 @@ public class BookListFragment extends android.support.v4.app.Fragment
             @Override
             public void onRefresh()
             {
-                List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+                List<Book> bookList = BookDBUtil.searchForAll(dbHelper.getReadableDatabase());
                 recyclerView.setAdapter(new MainBookAdapter(bookList, getActivity()));
                 refreshLayout.setRefreshing(false);
             }

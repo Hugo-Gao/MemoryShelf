@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gyfzyt.memoryshelf.Beans.bookBean.Book;
+import com.gyfzyt.memoryshelf.Beans.movieBean.Movie;
 import com.gyfzyt.memoryshelf.DB.MyDBHelper;
-import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
+import com.gyfzyt.memoryshelf.Dao.MovieDBUtil;
 import com.gyfzyt.memoryshelf.R;
 import com.gyfzyt.memoryshelf.views.GradeView;
 import com.squareup.picasso.Picasso;
@@ -24,64 +24,62 @@ import java.util.List;
  * Created by Administrator on 2017/10/19.
  */
 
-public class MainBookAdapter extends RecyclerView.Adapter<MainBookAdapter.MainBookAdapterViewHolder> implements View.OnClickListener {
-    private List<Book> bookList;
+public class MainMovieAdapter extends RecyclerView.Adapter<MainMovieAdapter.MainMovieAdapterViewHolder> implements View.OnClickListener {
+    private List<Movie> movieList;
     private Context context;
     private LayoutInflater layoutInflater;
     private MyDBHelper dbHelper;
     private OnItemClickListener onItemClickListener;
 
-    public MainBookAdapter(List<Book> bookList, Context context)
+    public MainMovieAdapter(List<Movie> movieList, Context context)
     {
-        this.bookList = bookList;
+        this.movieList = movieList;
         this.context = context;
         this.layoutInflater=LayoutInflater.from(context);
         dbHelper = new MyDBHelper(context,"shelfDB.db",null,1);
     }
 
     @Override
-    public MainBookAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public MainMovieAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
-        View view = layoutInflater.inflate(R.layout.book_card_main, parent, false);
+        View view = layoutInflater.inflate(R.layout.movie_card_main, parent, false);
         view.setOnClickListener(this);
-        return new MainBookAdapterViewHolder(view,context);
+        return new MainMovieAdapterViewHolder(view,context);
     }
 
     @Override
-    public void onBindViewHolder(MainBookAdapterViewHolder holder, final int position)
+    public void onBindViewHolder(MainMovieAdapterViewHolder holder, final int position)
     {
-        final Book book = bookList.get(position);
-
-        List<String> list = new ArrayList<>(book.getAuthor());
-        holder.book_author.setText(book.getTitle()+"  "+list.get(0) + " 著");
-        Picasso.with(context).load(book.getImages().getLarge()).into(holder.book_pic);
+        final Movie movie = movieList.get(position);
+        holder.movie_actor.setText(movie.getCasts().get(0).getName());
+        Picasso.with(context).load(movie.getImages().getLarge()).into(holder.movie_pic);
         holder.fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                BookDBUtil.deleteInfoDB(book.getId(), dbHelper.getWritableDatabase());
+                MovieDBUtil.deleteInfoDB(movie.getId(), dbHelper.getWritableDatabase());
                 removeData(position);
             }
         });
-        holder.gradeView.setgradeNumber(Float.parseFloat(book.getRating().getAverage()));
+        holder.gradeView.setgradeNumber((float) movie.getRating().getAverage());
         holder.itemView.setTag(position);
     }
 
     public void removeData(int position)
     {
-        bookList.remove(position);
+        movieList.remove(position);
         Log.d("haha", "删除position" + position);
         this.notifyItemRemoved(position);
-        if(position != bookList.size()){
-            this.notifyItemRangeChanged(position, bookList.size() - position);
+        if(position != movieList.size()){
+            this.notifyItemRangeChanged(position, movieList.size() - position);
         }
     }
 
     @Override
     public int getItemCount()
     {
-        return bookList.size();
+        return movieList.size();
     }
 
     @Override
@@ -91,18 +89,18 @@ public class MainBookAdapter extends RecyclerView.Adapter<MainBookAdapter.MainBo
         }
     }
 
-    public static class MainBookAdapterViewHolder extends RecyclerView.ViewHolder {
+    public static class MainMovieAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView book_pic;
-        TextView book_author;
+        ImageView movie_pic;
+        TextView movie_actor;
         FloatingActionButton fab;
         GradeView gradeView;
-        public MainBookAdapterViewHolder(View itemView, final Context context)
+        public MainMovieAdapterViewHolder(View itemView, final Context context)
         {
             super(itemView);
-            book_author = (TextView) itemView.findViewById(R.id.book_main_author);
-            book_pic = (ImageView) itemView.findViewById(R.id.book_main_pic);
-            fab = (FloatingActionButton) itemView.findViewById(R.id.book_main_delete_btn);
+            movie_actor = (TextView) itemView.findViewById(R.id.movie_main_actor);
+            movie_pic = (ImageView) itemView.findViewById(R.id.movie_main_pic);
+            fab = (FloatingActionButton) itemView.findViewById(R.id.movie_main_delete_btn);
             gradeView = (GradeView) itemView.findViewById(R.id.star);
         }
     }

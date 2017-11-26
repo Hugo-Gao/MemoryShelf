@@ -17,14 +17,20 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.gyfzyt.memoryshelf.Adapter.MainBookAdapter;
-import com.gyfzyt.memoryshelf.Beans.Book;
+import com.gyfzyt.memoryshelf.Adapter.MainMovieAdapter;
+import com.gyfzyt.memoryshelf.Beans.bookBean.Book;
+import com.gyfzyt.memoryshelf.Beans.movieBean.Movie;
 import com.gyfzyt.memoryshelf.DB.MyDBHelper;
 import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
+import com.gyfzyt.memoryshelf.Dao.MovieDBUtil;
 import com.gyfzyt.memoryshelf.Dao.SPUtil;
 import com.gyfzyt.memoryshelf.R;
 
 import java.util.List;
 
+/**
+ * 主Activity
+ */
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener
 {
     private BottomNavigationView btView;
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                 {
                     if (SPUtil.getBookChangeNum(MainActivity.this))
                     {
-                        final List<Book> bookList = BookDBUtil.searchForAllBook(dbHelper.getReadableDatabase());
+                        final List<Book> bookList = BookDBUtil.searchForAll(dbHelper.getReadableDatabase());
                         MainBookAdapter mainBookAdapter=new MainBookAdapter(bookList, MainActivity.this);
                         mainBookAdapter.setOnItemClickListener(new MainBookAdapter.OnItemClickListener() {
                             @Override
@@ -100,6 +106,24 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                         homeFragment.bookListFragment.recyclerView.setAdapter(mainBookAdapter);
                         homeFragment.bookListFragment.recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                         SPUtil.resetBookChangeNum(MainActivity.this);
+                        Log.d("haha","重新加载");
+                    }
+                    if (SPUtil.getMovieChangeNum(MainActivity.this))
+                    {
+                        final List<Movie> movieList = MovieDBUtil.searchForAll(dbHelper.getReadableDatabase());
+                        MainMovieAdapter mainMovieAdapter=new MainMovieAdapter(movieList, MainActivity.this);
+                        mainMovieAdapter.setOnItemClickListener(new MainMovieAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Intent intent = new Intent();
+                                intent.putExtra("movie", movieList.get(position));
+                                intent.setClass(MainActivity.this, MovieDetailActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                        homeFragment.movieListFragment.recyclerView.setAdapter(mainMovieAdapter);
+                        homeFragment.movieListFragment.recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        SPUtil.resetMovieChangeNum(MainActivity.this);
                         Log.d("haha","重新加载");
                     }
                 }

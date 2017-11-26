@@ -14,6 +14,7 @@ import com.gyfzyt.memoryshelf.R;
 
 /**
  * Created by Administrator on 2017/10/14.
+ * 包含bookListFragment和movieListFragment的主页
  */
 
 public class HomeFragment extends android.support.v4.app.Fragment
@@ -21,7 +22,7 @@ public class HomeFragment extends android.support.v4.app.Fragment
     private ViewPager viewPager;
     private TabLayout tabLayout;
     public BookListFragment bookListFragment = new BookListFragment();
-    private MovieListFragment movieListFragment = new MovieListFragment();
+    public MovieListFragment movieListFragment = new MovieListFragment();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)

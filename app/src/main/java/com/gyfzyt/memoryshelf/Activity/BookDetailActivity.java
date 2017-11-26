@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.gyfzyt.memoryshelf.Beans.Book;
+import com.gyfzyt.memoryshelf.Beans.bookBean.Book;
 import com.gyfzyt.memoryshelf.R;
 import com.gyfzyt.memoryshelf.views.GradeView;
 import com.squareup.picasso.Picasso;
 
 /**
  * Created by 高云帆 on 2017/11/18.
+ * 书籍详情界面
  */
 
 public class BookDetailActivity extends Activity {

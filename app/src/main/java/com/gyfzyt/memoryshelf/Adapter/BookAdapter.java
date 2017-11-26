@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dd.CircularProgressButton;
-import com.gyfzyt.memoryshelf.Beans.Book;
+import com.gyfzyt.memoryshelf.Beans.bookBean.Book;
 import com.gyfzyt.memoryshelf.DB.MyDBHelper;
 import com.gyfzyt.memoryshelf.Dao.BookDBUtil;
 import com.gyfzyt.memoryshelf.Dao.SPUtil;

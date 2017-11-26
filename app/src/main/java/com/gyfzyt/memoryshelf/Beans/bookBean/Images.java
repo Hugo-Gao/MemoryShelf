@@ -1,4 +1,4 @@
-package com.gyfzyt.memoryshelf.Beans;
+package com.gyfzyt.memoryshelf.Beans.bookBean;
 
 import java.io.Serializable;
 

@@ -4,17 +4,17 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.gyfzyt.memoryshelf.Beans.Book;
-import com.gyfzyt.memoryshelf.Beans.Images;
-import com.gyfzyt.memoryshelf.Beans.Ratings;
+import com.gyfzyt.memoryshelf.Beans.bookBean.Book;
+import com.gyfzyt.memoryshelf.Beans.bookBean.Images;
+import com.gyfzyt.memoryshelf.Beans.bookBean.Ratings;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/10/15.
+ * 书籍数据库操作类
  */
 
 public class BookDBUtil
@@ -69,7 +69,7 @@ public class BookDBUtil
      * @param db
      * @return
      */
-    public static List<Book> searchForAllBook(SQLiteDatabase db)
+    public static List<Book> searchForAll(SQLiteDatabase db)
     {
         List<Book> res = new ArrayList<>();
         Cursor cursor = db.query("Books", null, null, null, null, null, null);

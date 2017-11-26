@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_marginBottom="15dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    >
+
+    <ImageView
+        android:id="@+id/movie_pic"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/movie_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="书名"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="60dp"
+        android:text="豆瓣评分:" />
+
+    <com.gyfzyt.memoryshelf.views.GradeView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="60dp"
+        app:Grade="@drawable/star"
+        app:nullGrade="@drawable/star_null"
+        app:starDistance="0dp"
+        app:starSize="15dp"
+        android:id="@+id/star"
+        />
+
+    <TextView
+        android:id="@+id/movie_actor_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="140dp"
+        android:gravity="right"
+        android:maxLines="1"
+        android:text="XXX主演"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/movie_director"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="160dp"
+        android:gravity="right"
+        android:text="XXX导演"
+        android:textColor="#000000" />
+
+    <com.dd.CircularProgressButton
+        android:id="@+id/add_movie_btn"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="140dp"
+        android:textColor="#ffffff"
+        android:textSize="10sp"
+        app:cpb_selectorIdle="@color/add_btn_idle"
+        app:cpb_textComplete="已加入"
+        app:cpb_textIdle="加入记忆架" />
+</android.support.v7.widget.CardView>
