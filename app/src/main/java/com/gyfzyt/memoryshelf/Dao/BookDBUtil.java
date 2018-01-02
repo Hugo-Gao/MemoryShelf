@@ -3,14 +3,21 @@ package com.gyfzyt.memoryshelf.Dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.gyfzyt.memoryshelf.Beans.bookBean.Book;
 import com.gyfzyt.memoryshelf.Beans.bookBean.Images;
 import com.gyfzyt.memoryshelf.Beans.bookBean.Ratings;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static android.media.CamcorderProfile.get;
 
 /**
  * Created by Administrator on 2017/10/15.
@@ -20,6 +27,7 @@ import java.util.List;
 public class BookDBUtil
 {
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void insertIntoDB(Book book, SQLiteDatabase db)
     {
         ContentValues values = new ContentValues();
@@ -35,6 +43,12 @@ public class BookDBUtil
         values.put("pages", book.getPages());
         values.put("price", book.getPrice());
         values.put("book_id",book.getId());
+        //获取系统日期
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        values.put("add_book_date", year+"-"+month+"-"+day);//添加用户加入书籍的日期
         db.insert("Books", null, values);
         db.close();
     }

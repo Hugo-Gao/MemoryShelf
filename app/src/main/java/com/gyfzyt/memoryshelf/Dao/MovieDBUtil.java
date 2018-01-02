@@ -3,6 +3,9 @@ package com.gyfzyt.memoryshelf.Dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.util.Calendar;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import com.gyfzyt.memoryshelf.Beans.movieBean.Casts;
 import com.gyfzyt.memoryshelf.Beans.movieBean.Directors;
@@ -20,6 +23,7 @@ import java.util.List;
  */
 
 public class MovieDBUtil {
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void insertIntoDB(Movie movie, SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put("movieName", movie.getTitle());
@@ -31,6 +35,12 @@ public class MovieDBUtil {
         values.put("imgUrl", movie.getImages().getLarge());
         values.put("summary", movie.getSummary());
         values.put("movie_id", movie.getId());
+        //获取系统日期
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        values.put("add_movie_date", year+"-"+month+"-"+day);//添加用户加入电影的日期
         db.insert("movies", null, values);
         db.close();
     }

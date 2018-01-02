@@ -32,7 +32,8 @@ public class MyDBHelper extends SQLiteOpenHelper
                 "publisher TEXT," +
                 "pages INTEGER," +
                 "price TEXT," +
-                "book_id TEXT)";
+                "book_id TEXT," +
+                "add_book_date TEXT)";//用户添加该书籍的时间
         db.execSQL(bookSql);
         String movieSql = "CREATE TABLE IF NOT EXISTS Movies(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," +
@@ -44,8 +45,8 @@ public class MyDBHelper extends SQLiteOpenHelper
                 "year TEXT," +
                 "imgUrl TEXT," +
                 "summary TEXT," +
-                "movie_id TEXT" +
-                ")";
+                "movie_id TEXT," +
+                "add_movie_date TEXT)";//用户添加该电影的时间
         db.execSQL(movieSql);
         Log.d("haha", "数据库执行完毕");
     }

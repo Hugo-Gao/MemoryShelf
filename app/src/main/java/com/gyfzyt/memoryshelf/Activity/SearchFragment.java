@@ -159,8 +159,6 @@ public class SearchFragment extends android.support.v4.app.Fragment
                 searchMovie(searchContent);
             }
         });
-
-
     }
 
     private void searchMovie(String text)
