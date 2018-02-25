@@ -1,25 +1,9 @@
-![Screenshot_2018-01-02-10-55-29-282_com.gyfzyt.mem.png](https://i.loli.net/2018/01/02/5a4af5265a3cd.png)
+# 记忆架
 
-(https://i.loli.net/2018/01/02/5a4af5265a3cd.png)
-![Screenshot_2018-01-02-10-55-34-948_com.gyfzyt.mem.png](https://i.loli.net/2018/01/02/5a4af5268ed50.png)](https://i.loli.net/2018/01/02/5a4af5268ed50.png)
-[![Screenshot_2018-01-02-10-55-37-912_com.gyfzyt.mem.png](https://i.loli.net/2018/01/02/5a4af529ec11b.png)](https://i.loli.net/2018/01/02/5a4af529ec11b.png)
+[记忆架Github地址](https://github.com/Hugo-Gao/MemoryShelf)
 
+记忆架的起源是这样的，老早我就看到了豆瓣公布了它的API。[豆瓣API地址](https://developers.douban.com/wiki/?title=guide) ，于是我就一直想用这个API搞点事情。我很喜欢看电影和看书，而在参考是否看一部电影或书籍之前我都会先做调研看看这电影或书是否好看，而对于我来说是否好看的重要指标就是它的豆瓣评分。而看完后我还想收藏我看过的所有书籍和电影，并对收藏的数据进行分析总结。这些就是记忆架的功能。这个项目是我和一个小伙伴一起开发的，我负责界面设计，以及书籍电影等的模块开发，他负责所有数据的整合统计。
 
+![](https://i.loli.net/2018/02/25/5a9231454db85.png)
 
-[![Screenshot_2018-01-02-10-56-27-782_com.gyfzyt.mem.png](https://i.loli.net/2018/01/02/5a4af52a1297b.png)](https://i.loli.net/2018/01/02/5a4af52a1297b.png)
-
-
-
-[![Screenshot_2018-01-02-10-55-55-882_com.gyfzyt.mem.png](https://i.loli.net/2018/01/02/5a4af52d2ca80.png)](https://i.loli.net/2018/01/02/5a4af52d2ca80.png)
-
-
-
-
-
-[![Screenshot_2018-01-02-10-55-52-294_com.gyfzyt.mem.png](https://i.loli.net/2018/01/02/5a4af52d7ac48.png)](https://i.loli.net/2018/01/02/5a4af52d7ac48.png)
-
-
-
-
-
-[![Screenshot_2018-01-02-10-56-24-504_com.gyfzyt.mem.png](https://i.loli.net/2018/01/02/5a4af52dc8280.png)](https://i.loli.net/2018/01/02/5a4af52dc8280.png)
+![](https://i.loli.net/2018/02/25/5a923277e06a3.png)
